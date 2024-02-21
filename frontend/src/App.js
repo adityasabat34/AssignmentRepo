@@ -1,7 +1,12 @@
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 const App = () => {
   return (
     <div>
-      <h1>My App</h1>
+      <Header />
+      <div style={{ height: '100px' }}></div>
+      <Footer />
     </div>
   );
 };
