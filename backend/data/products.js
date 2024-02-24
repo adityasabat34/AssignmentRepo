@@ -11,7 +11,7 @@ const products = [
   },
   {
     name: 'Pack of 2 Round Neck T-Shirts',
-    image: '/images/male_img_4.jpg',
+    image: '/images/image666.jpg',
     description:
       'Etiam cursus condimentum vulputate. Nulla nisi orci, vulputate at dolor et, malesuada ultrices nisi. Ut varius ex ut purus porttitor, a facilisis orci condimentum. Nullam in elit et sapien ornare pellentesque at ac lorem.',
     brand: 'Urban Outfitters',

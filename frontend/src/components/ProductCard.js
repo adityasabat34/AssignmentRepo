@@ -1,4 +1,4 @@
-import { Flex, Heading, Box, Image, Link, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
@@ -8,22 +8,27 @@ const ProductCard = ({ product }) => {
       to={`/product/${product._id}`}
       _hover={{ textDecor: 'none' }}
     >
-      <Box borderRadius="lg" bgColor="white" _hover={{ shadow: 'md' }}>
+      <Box
+        borderRadius="lg"
+        bgColor="white"
+        _hover={{ shadow: 'md' }}
+        border="2px solid black"
+      >
         <Image
           src={product.image}
           alt={product.name}
           w="full"
           h="550px"
+          objectFit="fill"
           borderTopLeftRadius="lg"
           borderTopRightRadius="lg"
-        ></Image>
-
-        <Flex py="5" px="5" direction="column" justifyContent="space-between">
+        />
+        <Flex py="5" px="4" direction="column" justifyContent="space-between">
           <Heading as="h4" fontSize="lg" mb="3">
             {product.name}
           </Heading>
           <Flex alignItems="center" justifyContent="space-between">
-            <Text fontSize="2xl" fontWeight="bold" color="black">
+            <Text fontSize="2xl" fontWeight="bold" color="blue.600">
               ₹{product.price}
             </Text>
           </Flex>
