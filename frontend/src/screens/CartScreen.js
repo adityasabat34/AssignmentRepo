@@ -43,130 +43,129 @@ const CartScreen = () => {
   };
 
   return (
-    <Grid>
-      <Box>
-        <Heading mb="8">Shopping Cart</Heading>
-        <Flex>
-          {cartItems.length === 0 ? (
-            <Message>
-              Your cart is empty.{' '}
-              <Link as={RouterLink} to="/">
-                Go Back
-              </Link>
-            </Message>
-          ) : (
-            <Grid templateColumns="4fr 2fr" gap="10" w="full">
-              <Flex
-                direction="column"
-                border="2px solid black"
-                borderRadius="md"
-              >
-                {cartItems.map((item) => (
-                  <Grid
-                    key={item.product}
-                    size="100%"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    borderBottom="1px"
-                    borderColor="gray.200"
-                    py="4"
-                    px="2"
-                    rounded="lg"
-                    _hover={{ bgColor: 'gray.50' }}
-                    templateColumns="1fr 4fr 2fr 2fr 2fr"
-                  >
-                    {/* Product Image */}
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      borderRadius="lg"
-                      height="14"
-                      width="14"
-                      objectFit="cover"
-                    />
+    <Box p={{ base: '4', md: '8' }}>
+      <Heading
+        as="h2"
+        mb={{ base: '4', md: '8' }}
+        fontSize={{ base: 'xl', md: '2xl' }}
+      >
+        Shopping Cart
+      </Heading>
+      <Flex direction={{ base: 'column', md: 'row' }}>
+        {cartItems.length === 0 ? (
+          <Message>
+            Your cart is empty.{' '}
+            <Link as={RouterLink} to="/">
+              Go Back
+            </Link>
+          </Message>
+        ) : (
+          <Grid
+            templateColumns={{ base: '1fr', md: '4fr 2fr' }}
+            gap={{ base: '4', md: '8' }}
+            w="full"
+          >
+            <Flex direction="column" border="2px solid black" borderRadius="md">
+              {cartItems.map((item) => (
+                <Grid
+                  key={item.product}
+                  size="100%"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  borderBottom="1px"
+                  borderColor="gray.200"
+                  py="4"
+                  px="2"
+                  rounded="lg"
+                  _hover={{ bgColor: 'gray.50' }}
+                  templateColumns="1fr 4fr 2fr 2fr 2fr"
+                >
+                  {/* Product Image */}
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    borderRadius="lg"
+                    height="14"
+                    width="14"
+                    objectFit="cover"
+                  />
 
-                    {/* Product Name */}
-                    <Text fontWeight="semibold" fontSize="lg">
-                      <Link as={RouterLink} to={`/product/${item.product}`}>
-                        {item.name}
-                      </Link>
-                    </Text>
-
-                    {/* Product Price */}
-                    <Text fontWeight="semibold" fontSize="lg">
-                      ₹{item.price}
-                    </Text>
-
-                    {/* Quantity Select Box */}
-                    <Select
-                      value={item.qty}
-                      onChange={(e) =>
-                        dispatch(addToCart(item.product, +e.target.value))
-                      }
-                      width="20"
-                    >
-                      {[...Array(item.countInStock).keys()].map((i) => (
-                        <option key={i + 1}>{i + 1}</option>
-                      ))}
-                    </Select>
-
-                    {/* Delete Button */}
-                    <Button
-                      type="button"
-                      colorScheme="red"
-                      onClick={() => removeFromCartHandler(item.product)}
-                    >
-                      <Icon as={IoTrashBinSharp} />
-                    </Button>
-                  </Grid>
-                ))}
-              </Flex>
-
-              {/* Second Column */}
-              <Flex
-                direction="column"
-                bgColor="gray.200"
-                rounded="md"
-                padding="5"
-                height="48"
-                justifyContent="space-between"
-                border="2px solid black"
-              >
-                <Flex direction="column">
-                  <Heading as="h2" fontSize="2xl" mb="2">
-                    Subtotal (
-                    {cartItems.reduce((acc, currVal) => acc + currVal.qty, 0)}{' '}
-                    items)
-                  </Heading>
-                  <Text
-                    fontWeight="bold"
-                    fontSize="2xl"
-                    color="blue.600"
-                    mb="4"
-                  >
-                    ₹
-                    {cartItems.reduce(
-                      (acc, currVal) => acc + currVal.qty * currVal.price,
-                      0
-                    )}
+                  {/* Product Name */}
+                  <Text fontWeight="semibold" fontSize="lg">
+                    <Link as={RouterLink} to={`/product/${item.product}`}>
+                      {item.name}
+                    </Link>
                   </Text>
 
+                  {/* Product Price */}
+                  <Text fontWeight="semibold" fontSize="lg">
+                    ₹{item.price}
+                  </Text>
+
+                  {/* Quantity Select Box */}
+                  <Select
+                    value={item.qty}
+                    onChange={(e) =>
+                      dispatch(addToCart(item.product, +e.target.value))
+                    }
+                    width="20"
+                  >
+                    {[...Array(item.countInStock).keys()].map((i) => (
+                      <option key={i + 1}>{i + 1}</option>
+                    ))}
+                  </Select>
+
+                  {/* Delete Button */}
                   <Button
                     type="button"
-                    disabled={cartItems.length === 0}
-                    size="lg"
-                    colorScheme="teal"
-                    bgColor="gray.800"
+                    colorScheme="red"
+                    onClick={() => removeFromCartHandler(item.product)}
                   >
-                    Proceed to checkout
+                    <Icon as={IoTrashBinSharp} />
                   </Button>
-                </Flex>
+                </Grid>
+              ))}
+            </Flex>
+
+            {/* Second Column */}
+            <Flex
+              direction="column"
+              bgColor="gray.200"
+              rounded="md"
+              padding="5"
+              height="48"
+              justifyContent="space-between"
+              border="2px solid black"
+            >
+              <Flex direction="column">
+                <Heading as="h2" fontSize="2xl" mb="2">
+                  Subtotal (
+                  {cartItems.reduce((acc, currVal) => acc + currVal.qty, 0)}{' '}
+                  items)
+                </Heading>
+                <Text fontWeight="bold" fontSize="2xl" color="blue.600" mb="4">
+                  ₹
+                  {cartItems.reduce(
+                    (acc, currVal) => acc + currVal.qty * currVal.price,
+                    0
+                  )}
+                </Text>
+
+                <Button
+                  type="button"
+                  disabled={cartItems.length === 0}
+                  size="lg"
+                  colorScheme="teal"
+                  bgColor="gray.800"
+                >
+                  Proceed to checkout
+                </Button>
               </Flex>
-            </Grid>
-          )}
-        </Flex>
-      </Box>
-    </Grid>
+            </Flex>
+          </Grid>
+        )}
+      </Flex>
+    </Box>
   );
 };
 

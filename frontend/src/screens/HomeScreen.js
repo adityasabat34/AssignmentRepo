@@ -18,7 +18,12 @@ const HomeScreen = () => {
 
   return (
     <>
-      <Heading as="h2" mb="10" fontSize="xl">
+      <Heading
+        as="h2"
+        mb={{ base: '6', md: '10' }}
+        fontSize={{ base: 'xl', md: '2xl' }}
+        textAlign="center"
+      >
         Our Products
       </Heading>
 
@@ -27,7 +32,16 @@ const HomeScreen = () => {
       ) : error ? (
         <Message />
       ) : (
-        <Grid templateColumns="1fr 1fr 1fr 1fr" gap="10">
+        <Grid
+          templateColumns={{
+            base: '1fr',
+            sm: 'repeat(2, 1fr)',
+            md: 'repeat(3, 1fr)',
+            lg: 'repeat(4, 1fr)',
+          }}
+          gap={{ base: '4', md: '6' }}
+          px={{ base: '4', md: '0' }}
+        >
           {products.map((prod) => (
             <ProductCard key={prod._id} product={prod} />
           ))}
